@@ -761,7 +761,7 @@ Guint PDFDoc::writeObject (Object* obj, Ref* ref, OutStream* outStr)
           obj1.free();
         } else {
           //raw stream copy
-          FilterStream *fs = dynamic_cast<FilterStream*>(stream);
+          FilterStream *fs = static_cast<FilterStream*>(stream);
           if (fs) {
             BaseStream *bs = fs->getBaseStream();
             if (bs) {

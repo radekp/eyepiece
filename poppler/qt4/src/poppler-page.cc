@@ -559,7 +559,7 @@ QList<Annotation*> Page::annotations() const
 
         Annotation * annotation = 0;
         int annotID = ann->getId();
-        AnnotMarkup * markupann = dynamic_cast< AnnotMarkup * >( ann );
+        AnnotMarkup * markupann = static_cast< AnnotMarkup * >( ann );
         bool addToPage = true;      // Popup annots are added to custom queue
 
         /** 1.1. GET Subtype */
@@ -620,7 +620,7 @@ QList<Annotation*> Page::annotations() const
                     t->setCalloutPoint( 0, tmppoint );
                     XPDFReader::transform( MTX, callout->getX2(), callout->getY2(), tmppoint );
                     t->setCalloutPoint( 1, tmppoint );
-                    if ( AnnotCalloutMultiLine * callout_v6 = dynamic_cast< AnnotCalloutMultiLine * >( callout ) )
+                    if ( AnnotCalloutMultiLine * callout_v6 = static_cast< AnnotCalloutMultiLine * >( callout ) )
                     {
                         XPDFReader::transform( MTX, callout_v6->getX3(), callout_v6->getY3(), tmppoint );
                         t->setCalloutPoint( 2, tmppoint );

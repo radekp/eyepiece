@@ -614,35 +614,35 @@ _poppler_action_new (PopplerDocument *document,
 	switch (link->getKind ()) {
 	case actionGoTo:
 		action->type = POPPLER_ACTION_GOTO_DEST;
-		build_goto_dest (document, action, dynamic_cast <LinkGoTo *> (link));
+		build_goto_dest (document, action, static_cast <LinkGoTo *> (link));
 		break;
 	case actionGoToR:
 		action->type = POPPLER_ACTION_GOTO_REMOTE;
-		build_goto_remote (action, dynamic_cast <LinkGoToR *> (link));
+		build_goto_remote (action, static_cast <LinkGoToR *> (link));
 		break;
 	case actionLaunch:
 		action->type = POPPLER_ACTION_LAUNCH;
-		build_launch (action, dynamic_cast <LinkLaunch *> (link));
+		build_launch (action, static_cast <LinkLaunch *> (link));
 		break;
 	case actionURI:
 		action->type = POPPLER_ACTION_URI;
-		build_uri (action, dynamic_cast <LinkURI *> (link));
+		build_uri (action, static_cast <LinkURI *> (link));
 		break;
 	case actionNamed:
 		action->type = POPPLER_ACTION_NAMED;
-		build_named (action, dynamic_cast <LinkNamed *> (link));
+		build_named (action, static_cast <LinkNamed *> (link));
 		break;
 	case actionMovie:
 		action->type = POPPLER_ACTION_MOVIE;
-		build_movie (document, action, dynamic_cast<LinkMovie*> (link));
+		build_movie (document, action, static_cast<LinkMovie*> (link));
 		break;
 	case actionRendition:
 		action->type = POPPLER_ACTION_RENDITION;
-		build_rendition (action, dynamic_cast<LinkRendition*> (link));
+		build_rendition (action, static_cast<LinkRendition*> (link));
 		break;
 	case actionOCGState:
 		action->type = POPPLER_ACTION_OCG_STATE;
-		build_ocg_state (document, action, dynamic_cast<LinkOCGState*> (link));
+		build_ocg_state (document, action, static_cast<LinkOCGState*> (link));
 		break;
 	case actionUnknown:
 	default:
