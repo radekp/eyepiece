@@ -31,7 +31,7 @@ void Installer::start()
         if(i == 0) {
             script.start("apt-get update");
         } else {
-            script.start("apt-get -y install libdjvulibre21");
+            script.start("apt-get -y install libdjvulibre21 libfontconfig1");
         }
 
         while( !script.waitForFinished(500) ) {

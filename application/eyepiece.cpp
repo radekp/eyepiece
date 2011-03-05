@@ -97,7 +97,8 @@ Eyepiece::Eyepiece ( QWidget *parent, Qt::WFlags f ) :
 
 bool Eyepiece::libsFound()
 {
-    return QFile::exists("/usr/lib/libdjvulibre.so.21");
+    return QFile::exists("/usr/lib/libdjvulibre.so.21") &&
+                QFile::exists("/usr/lib/libfontconfig.so.1");
 }
 
 void Eyepiece::checkLibs()
@@ -107,7 +108,7 @@ void Eyepiece::checkLibs()
         if (QMessageBox::warning(
                 this,
                 tr("Eyepiece"),
-                tr("libdjvulibre21 is not found. Do you want to install it now via apt-get?"),
+                tr("libdjvulibre21 or libfontconfig is not found. Do you want to install it now via apt-get?"),
                 QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
         {
             Installer *apt = new Installer(this);
