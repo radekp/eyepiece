@@ -10,5 +10,5 @@ Vcs-Browser: https://github.com/radekp/qtmoko
 
 Package: qtmoko-eyepiece
 Architecture: any
-Depends: 
+Depends:  libdjvulibre21 (>=3.5.23-3), libfontconfig1 (>=2.8.0-2.1)
 Description: DjVu and PDF viewer
