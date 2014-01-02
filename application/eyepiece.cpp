@@ -12,7 +12,6 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QTimer>
-#include <installer.h>
 #include <accelerometers.h>
 #include <math.h>
 
@@ -21,7 +20,6 @@ static const QString mime_djvu = "image/vnd.djvu";  // TODO: ^
 
 int curRot = 0;
 bool acc_enabled = false;
-bool libCheckPassed = false;
 
 /**
  * Constructor
@@ -90,43 +88,6 @@ Eyepiece::Eyepiece ( QWidget *parent, Qt::WFlags f ) :
         connect ( eyeDrawWidget, SIGNAL ( pressedAtRotateBtn() ), this, SLOT ( disableAutoRotate() ) );
 
         setWindowFlags(Qt::Dialog | Qt::WindowStaysOnTopHint);
-
-        QTimer::singleShot(0, this, SLOT(checkLibs()));
-
-}
-
-bool Eyepiece::libsFound()
-{
-    return QFile::exists("/usr/lib/libdjvulibre.so.21") &&
-                QFile::exists("/usr/lib/libfontconfig.so.1");
-}
-
-void Eyepiece::checkLibs()
-{
-    if (!libsFound())
-    {
-        if (QMessageBox::warning(
-                this,
-                tr("Eyepiece"),
-                tr("libdjvulibre21 or libfontconfig is not found. Do you want to install it now via apt-get?"),
-                QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
-        {
-            Installer *apt = new Installer(this);
-            apt->show();
-            apt->start();
-            if (libsFound())
-                QMessageBox::information(
-                    this,
-                    tr("Eyepiece"),
-                    tr("Installation completed successfully"));
-            else
-                QMessageBox::warning(
-                    this,
-                    tr("Eyepiece"),
-                    tr("Installation failed"));
-        }
-    }
-    libCheckPassed = true;
 }
 
 #define ANGLE_THRESHOLD  M_PI*12.0/180.0
@@ -441,7 +402,7 @@ bool Eyepiece::event(QEvent *event)
 {
     if(event->type() == QEvent::WindowDeactivate)
     {
-        if (libCheckPassed) lower();
+        lower();
     }
     else if(event->type() == QEvent::WindowActivate)
     {
@@ -454,13 +415,7 @@ bool Eyepiece::event(QEvent *event)
     }
     else if(event->type() == QEvent::Close)
     {
-        if (libCheckPassed)
-            setAutoRotate(false);
-        else
-        {
-            event->ignore();
-            return true;
-        }
+        setAutoRotate(false);
     }
 
     return QWidget::event(event);

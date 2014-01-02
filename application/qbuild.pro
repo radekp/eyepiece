@@ -16,14 +16,12 @@ HEADERS = \
   document.h \
   eyedrawwidget.h \
   eyeosd.h \
-  installer.h \
   accelerometers.h
 SOURCES = \
   main.cpp \
   eyepiece.cpp \
   eyedrawwidget.cpp \
   eyeosd.cpp \
-  installer.cpp \
   accelerometers.cpp
 FORMS += eyepieceui.ui
 RESOURCES += res/eyepiece.qrc

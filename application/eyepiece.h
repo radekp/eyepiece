@@ -43,7 +43,6 @@ class Eyepiece : public QWidget, public Ui_Eyepiece
 		void onDocumentLoadError();
 		//QWaitWidget * waitWidget; //test
 
-                bool libsFound();
                 void setAutoRotate(bool x);
 
 	public slots:
@@ -63,7 +62,6 @@ class Eyepiece : public QWidget, public Ui_Eyepiece
 		void onKeyClicked ( int );
 		void openDocument ( const QContent & );
 
-                void checkLibs();
                 void acc_timerAction();
 
         protected:
